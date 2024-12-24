@@ -1,0 +1,48 @@
+---
+title: 2022 World Cup Final Preview
+execute: 
+  echo: false
+  warning: false
+format: 
+  pdf:
+    pdf-engine: lualatex
+    mainfont: "USSF 90 Min Display-Medium"
+    sansfont: "USSF 90 Min Display-Medium"
+    monofont: "USSF 90 Min Display-Medium"
+    boldfont: "USSF 90 Min Display-Bold"
+    sansfontoptions: 
+      - Color=BB2533
+    fig-width: 16
+    fig-height: 9
+
+---
+
+# Introduction
+
+France has just beaten Morocco to advance to the World Cup final where they will face Argentina, setting up the anticipated battle of Mbappe versus Messi. While much of the attention will be on how these two players perform, understanding how France and Argentina create opportunities for their key players will be crucial for devising effective game plans. One area that could prove pivotal is analyzing where teams win the ball back and whether those moments result in quick shots. For this analysis, the focus is on regains in the attacking half, where they occur most frequently, and how many lead to quick shots.
+
+# Methodology
+
+Data from PFF FC was used to conduct this analysis, including both event and tracking data. PFF FC organizes event data into game events and possession events. Game events are moments when a player is in control of the ball while possession events describe the specific actions taken during a game event. For instance, one game event might include multiple possession events, such as a dribble followed by a pass. For this analysis, regains were defined as possession events that ended in a loss of possession. See @tbl-dispossessed for details on the possession events and outcomes that determine a loss of possession. Quick shots were defined as shots occurring within 20 seconds of a regain. Once regains were identified, the corresponding tracking data was used to locate the position of the ball at the end of the possession event. Only regains occurring in the attacking half of the team that regained possession were analyzed.
+
+| **Possession Event**   | **Outcome**                                                         |
+|--------------------|-----------------------------------------------------------------|
+| Passing Event  | Blocked, Defensive Interception, Out of Play                    |
+| Challenge Event| Distribution Disrupted, Forces Carrier Out of Play, Beats Man Loses Ball, Out of Play |
+| Ball Carry Event| Beats Man Loses Ball, Forced Out of Play, Successful Tackle    |
+
+: Regain Definition {#tbl-dispossessed}
+
+# Analysis
+
+After identifying attacking half regains for all games of the 2022 World Cup (excluding the final and third-place match), the number of regains each team made and the number that led to shots were summarized. To account for the varying number of games played by each team, totals for regains and shots were divided by the number of games played. This approach allowed for a clearer comparison of which teams led in regains and regains resulting in shots per game, as shown in @tbl-regains.
+
+To understand where attacking half regains occurred for both teams, a kernel density plot was created to analyze the distribution of regains for France and Argentina. @fig-kde illustrates this distribution, showing where regains leading to shots occurred and the average height of attacking half regains.
+
+# Discussion
+
+As shown in @tbl-regains, both Argentina and France performed in the middle of the pack, with Argentina slightly outperforming France in both categories. Analyzing where regains occur for these two teams reveals an interesting pattern. Both teams favor the flanks when regaining possession in the attacking half, but Argentina tends to favor their left side, while France leans toward their right. This overlap suggests that the same areas of the field could become contested spaces during the final, potentially serving as the decisive battleground for determining the outcome of the match.
+
+![Summary of regains in the attacking half.](wc_regains_table.png){fig-align="center" width=90% #tbl-regains}
+
+![Summary of Regains: Argentina v France](wc_regains.png){fig-align="center" width=80% #fig-kde}
