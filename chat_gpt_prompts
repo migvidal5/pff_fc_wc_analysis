@@ -1,0 +1,9 @@
+1. I am trying to create another column where a shot occurs within 20 seconds of an opposition regain. The way it needs to be specified is that a possessionEvent = SH, the possessionEvent team has to equal the opponent where the opposition regain occurred, and the the gameClock of the possession event have to be less than or equal to the gameClock + duration of the opposition regain
+
+full_data['shot_after_regain'] = (
+    ((full_data['opposition_regain'] == True) &
+    (full_data['gameId'] == full_data['gameId'].shift(-1)) &
+    (full_data['opponent'] == full_data['team'].shift(-1))) 
+)
+
+2. I have multiple .jsonl.bz2 files that I need to open. But within each file I only need partial data of the very large file. The only columns I need are gameRefId, period, ballsSmoothed, game_event_id, and possession_event_id. Additionally the data should be filtered for game_event_id and possession_event_id in a separate dataframe where opposition_regain is true. Lastly, the data in the .jsonl.bz2 file is tracking data so there will be multiple frames for each possession_event_id. I want just the last frame of the possession_event_id.
